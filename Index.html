@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Royal Matka — Apps on Google Play (Mobile)</title>
+  <meta name="description" content="Royal Matka — fast results, charts & alerts. Install now." />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Roboto (Google Play uses Roboto-ish) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Mobile-first Play Store style (single page) */
+    :root{
+      --bg:#ffffff; --surface:#ffffff; --muted:#5f6368; --text:#202124; --accent:#1a73e8; --green:#01875f;
+      --glass:rgba(0,0,0,0.06);
+      --radius:14px;
+      font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Arial;
+    }
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;}
+    .page{max-width:480px;margin:0 auto;background:var(--bg);min-height:100vh;padding-bottom:0px;}
+
+    /* top play bar */
+    .topbar{display:flex;align-items:center;gap:10px;padding:0px;border-bottom:1px solid var(--glass);position:sticky;top:0;background:var(--bg);z-index:40}
+    .play-logo{display:flex;align-items:center;gap:8px;font-weight:600;color:#202124}
+    .play-logo img{width:100px;height:80px;margin-left: 8px;}
+    .top-actions{margin-left:auto;display:flex;gap:8px}
+    .icon-btn{background:transparent;border:1px solid var(--glass);padding:8px;border-radius:10px;font-weight:600;font-size:13px;cursor:pointer}
+
+    
+
+    /* header */
+    .header{display:flex;gap:12px;padding:16px;align-items:center}
+    .app-icon{width:88px;height:88px;border-radius:20px;overflow:hidden;flex:0 0 88px;background:#f3f5f7;display:flex;align-items:center;justify-content:center}
+    .app-icon img{width:100%;height:100%;object-fit:cover}
+    .meta{flex:1;min-width:0}
+    .app-name{font-size:20px;font-weight:700;line-height:1.05}
+    .dev{color:var(--muted);font-size:13px;margin-top:6px}
+    .rating-row{display:flex;gap:8px;align-items:center;margin-top:8px;color:var(--muted);font-size:13px}
+
+    /* Stats row (Play Store style) */
+.stats-row{
+  margin: 0 16px 14px;
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+}
+
+.stat-item{
+  text-align: center;
+  flex: 1;
+}
+
+.stat-main{
+  font-size: 13px;
+  font-weight: 700;
+  color: #202124;
+}
+
+.stat-sub{
+  font-size: 13px;
+  color: #5f6368;
+  margin-top: 3px;
+}
+
+.divider{
+  width: 1px;
+  height: 32px;
+  background: rgba(0,0,0,0.08);
+}
+
+/* Smaller screenshot cards (5–6 images support) */
+/* Smaller screenshot cards (Play Store accurate size) */
+/* Mobile-perfect Play Store screenshot cards */
+.sframe {
+    width: 42vw;                    /* 🔥 Perfect Play Store width */
+    height: 75vw;                   /* 🔥 Exact tall mobile screenshot ratio */
+    max-width: 170px;               /* Optional limit */
+    max-height: 320px;
+    border-radius: 10px;
+    background: #e9eefb;
+    background-size: cover;         /* 🔥 Full image fit */
+    background-position: top center;/* 🔥 Play Store style crop */
+    flex-shrink: 0;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* For very small screens (under 360px) */
+@media (max-width: 360px) {
+    .sframe {
+        width: 45vw;
+        height: 80vw;
+    }
+}
+
+
+
+
+
+    /* CTA pinned area (right in play store; mobile: below header) */
+    .install-area{padding:0 16px 10px 16px}
+    .install-btn{display:block;background:linear-gradient(180deg,var(--green),#017a52);color:#fff;padding:14px;border-radius:12px;text-align:center;text-decoration:none;font-weight:700}
+    .outline-btn{display:inline-block;padding:10px;border-radius:10px;border:1px solid var(--glass);text-decoration:none;color:var(--text);font-weight:600;text-align:center}
+
+    /* screenshots carousel */
+    .screens-title{padding:14px 16px 6px;font-weight:700;font-size:16px}
+    .screens{display:flex;gap:12px;overflow-x:auto;padding:8px 16px 18px;-webkit-overflow-scrolling:touch}
+    
+
+    /* about / features / whats new */
+    .card{background:var(--surface);border-radius:12px;margin:12px 16px;padding:12px;border:1px solid var(--glass)}
+    .card h3{margin:0 0 8px;font-size:16px}
+    .muted{color:var(--muted);font-size:14px;line-height:1.5}
+
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+    .feat{background:linear-gradient(180deg,#fff,#fbfdff);padding:10px;border-radius:10px;border:1px solid var(--glass);font-size:13px;color:var(--muted)}
+
+    /* ratings breakdown */
+    .rating-box{display:flex;gap:12px;align-items:center}
+    .avg{font-size:34px;font-weight:700}
+    .avg-meta{font-size:13px;color:var(--muted)}
+    .rb{flex:1}
+    .rb-row{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+    .bar{height:8px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#4c8bf5);flex:1}
+
+    /* reviews */
+    .review{padding:12px 0;border-top:1px dashed rgba(0,0,0,0.04)}
+    .avatar{width:44px;height:44px;border-radius:50%;background:#cbd5e1;display:flex;align-items:center;justify-content:center;font-weight:700;margin-right:10px}
+
+    .review-section {
+    padding: 25px;
+    max-width: 700px;
+    margin: auto;
+}
+
+.review-title {
+    font-size: 26px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.review-box {
+    background: #fff;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.review-box input,
+.review-box textarea {
+    width: 80%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border: 1px solid #c8c3c3;
+    border-radius: 8px;
+    font-size: 14px;
+    
+}
+.all-reviews {
+    margin-top: 25px;
+}
+
+.single-review {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.07);
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    background: #0b5ed7;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    border-radius: 50%;
+    margin-right: 12px;
+    font-weight: 600;
+}
+
+.profile h4 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.date {
+    margin: 0;
+    font-size: 13px;
+    color: #777;
+}
+
+.review-text {
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 12px 0;
+}
+
+.helpful-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.helpful-area span {
+    font-size: 15px;
+}
+
+.yes-btn, .no-btn {
+    border: none;
+    padding: 7px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.yes-btn {
+    background: #afb1b2;
+}
+
+.no-btn {
+    background: #bcbcbc;
+}
+
+
+.review-box textarea {
+    height: 110px;
+}
+
+.rate-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.star-rating {
+    display: flex;
+    margin-bottom: 20px;
+    gap: 6px;
+}
+
+.star {
+    font-size: 30px;
+    cursor: pointer;
+    color: #ccc;
+    transition: 0.2s;
+}
+
+.star.selected {
+    color: #FFC107;
+}
+
+.submit-btn {
+    background: #0b8e4a;
+    padding: 12px 22px;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+    /* footer */
+    .footer{padding:18px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* bottom sticky install (mobile mimic) */
+    .bottom-stick{position:fixed;left:0;right:0;bottom:0;background:var(--bg);padding:10px;border-top:1px solid rgba(0,0,0,0.06);display:flex;gap:8px;align-items:center;z-index:60}
+    .bottom-left{display:flex;flex-direction:column;gap:2px}
+    .small-muted{font-size:12px;color:var(--muted)}
+
+    /* responsive adjustments */
+    @media (max-width:420px){
+      .sframe{min-width:144px;height:420px}
+      .app-name{font-size:18px}
+      .app-icon{width:76px;height:76px;flex:0 0 76px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page" id="page">
+
+    <!-- topbar (Play badge) -->
+    <div class="topbar">
+      <div class="play-logo">
+        <!-- Play logo (public Wikimedia graphic) -->
+        <img src="https://tse4.mm.bing.net/th/id/OIP.8h80HV2FID_6iTuKd9qLzgHaEK?pid=Api&P=0&h=180" alt="Play">
+        <div></div>
+      </div>
+      <div class="top-actions" style="margin-left:auto">
+        <button class="icon-btn" id="shareTop">Share</button>
+      </div>
+    </div>
+
+    <!-- header -->
+    <div class="header" role="banner">
+      <div class="app-icon" aria-hidden="true">
+        <!-- YOUR UPLOADED IMAGE PATH (replace on Netlify with /images/icon.png) -->
+        <img id="appIcon" src="/images/WhatsApp Image 2025-11-23 at 12.24.13_79715eef.jpg" alt="Royal Matka Icon">
+      </div>
+      <div class="meta">
+        <div class="app-name">Royal Matka</div>
+        <div class="dev">Royal Labs · Entertainment</div>
+        <div class="rating-row">
+          <div style="font-weight:700;color:#f59e0b">★ 4.9</div>
+          <div class="muted">•</div>
+          <div id="installs" class="muted">50K+ installs</div>
+        </div>
+      </div>
+    </div>
+     
+    <!-- STATS ROW (Play Store style — ABOVE INSTALL BUTTON) -->
+<div class="stats-row">
+  <div class="stat-item">
+    <div class="stat-main">4.9<span style="font-weight:700;color:#395bd6"> ★</span></div>
+    <div class="stat-sub">12k+ reviews</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="stat-item">
+    <div class="stat-main">12.09 MB</div>
+    <div class="stat-sub">App Size</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="stat-item">
+    <div class="stat-main">4+</div>
+    <div class="stat-sub">Rated for 4+</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="stat-item">
+    <div class="stat-main">500K+</div>
+    <div class="stat-sub">Downloads</div>
+  </div>
+</div>
+
+<!-- INSTALL BUTTON -->
+<div class="install-area">
+  <a class="install-btn" id="installBtn"
+     href="https://royalmatkapp.com/download"
+     target="_blank" rel="noopener">
+     Install
+  </a>
+</div>
+
+    <!-- install area
+    <div class="install-area">
+      <a class="install-btn" id="installBtn" href="https://royalmatkapp.com/download" target="_blank" rel="noopener">Install</a>
+    </div> -->
+
+   <div class="screens-title">Screenshots</div>
+<div class="screens" id="screens">
+
+  <div class="sframe" data-src="images/WhatsApp Image 2025-11-23 at 12.24.15_6c602146.jpg"></div>
+  <div class="sframe" data-src="images/WhatsApp Image 2025-11-23 at 12.24.15_cf4f8429.jpg"></div>
+  <div class="sframe" data-src="images/WhatsApp Image 2025-11-23 at 12.24.15_88eae499.jpg"></div>
+  <div class="sframe" data-src="images/WhatsApp Image 2025-11-23 at 12.24.14_97353382.jpg"></div>
+  <div class="sframe" data-src="images/WhatsApp Image 2025-11-23 at 12.24.13_ab10a5d6.jpg"></div>
+  <div class="sframe" data-src="images/WhatsApp Image 2025-11-23 at 12.24.14_f910163b.jpg"></div>
+
+</div>
+
+
+    <!-- about + whats new + features -->
+    <div class="card" role="region" aria-label="About this app">
+      <h3>About this app</h3>
+      <div class="muted">Royal Matka delivers instant results, historical charts, favorites and push alerts. Designed for a fast, mobile-first experience. Use responsibly and follow local laws.</div>
+
+      <h3 style="margin-top:12px">What's new</h3>
+      <ul class="muted">
+        <li>Version 2.3.1 — Faster load time</li>
+        <li>New charts and filters</li>
+        <li>Bug fixes & stability improvements</li>
+      </ul>
+
+      <h3 style="margin-top:12px">Highlights</h3>
+      <div class="features">
+        <div class="feat">Live results & notifications</div>
+        <div class="feat">History & analytics</div>
+        <div class="feat">Favorites & watchlists</div>
+        <div class="feat">Secure local backup</div>
+      </div>
+    </div>
+        <div style="
+    max-width: 800px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 24px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+">
+
+    <!-- TOP HEADING -->
+    <h2 style="margin-top: 0; font-size: 17px;">Data safety</h2>
+
+    <!-- TOP PARAGRAPH -->
+    <p style="color:#444; font-size: 14px;">
+        Safety starts with understanding how developers collect and share your data. 
+        Data privacy and security practices may vary based on your use, region, and age. 
+        The developer provided this information and may update it over time.
+    </p>
+
+    <!-- SHARE DATA -->
+    <p style="font-size: 14px; margin: 28px 0 10px; display: flex; align-items: center;color:#555;">
+        <img src="https://play-lh.googleusercontent.com/iFstqoxDElUVv4T3KxkxP3OTcuFvWF5ZQQjT7aIxy4n2uaVigCCykxeG6EZV9FQ10X1itPj1oORm=s40-rw" 
+             style="width: 26px; height: 26px; margin-right: 12px;">
+        <strong>This app may share these data types with third parties</strong>
+    </p>
+    <p style="margin-left: 40px;font-size:12px; margin-top: -10px; color:#555;">
+        Personal info, App info and performance, Device or other IDs
+    </p>
+
+    <!-- COLLECT DATA -->
+    <p style="font-size: 14px; margin: 28px 0 10px; display: flex; align-items: center;color:#555;">
+        <img src="https://play-lh.googleusercontent.com/12USW7aflgz466ifDehKTnMoAep_VHxDmKJ6jEBoDZWCSefOC-ThRX14Mqe0r8KF9XCzrpMqJts=s40-rw" 
+             style="width: 26px; height: 26px; margin-right: 12px;">
+        <strong>This app may collect these data types</strong>
+    </p>
+    <p style="margin-left: 40px;font-size:12px; margin-top: -10px; color:#555;">
+        Personal info, Financial info and 3 others
+    </p>
+
+    <!-- ENCRYPTED -->
+    <p style="font-size: 14px; margin: 28px 0 10px; display: flex; align-items: center;color:#555;">
+        <img src="https://play-lh.googleusercontent.com/W5DPtvB8Fhmkn5LbFZki_OHL3ZI1Rdc-AFul19UK4f7np2NMjLE5QquD6H0HAeEJ977u3WH4yaQ=s40-rw" 
+             style="width: 26px; height: 26px; margin-right: 12px;">
+        <strong>Data is encrypted in transit</strong>
+    </p>
+
+    <!-- DATA DELETE REQUEST -->
+    <p style="font-size: 14px; margin: 28px 0 10px; display: flex; align-items: center;color:#555;">
+        <img src="https://play-lh.googleusercontent.com/ohRyQRA9rNfhp7xLW0MtW1soD8SEX45Oec7MyH3FaxtukWUG_6GKVpvh3JiugzryLi7Bia02HPw=s40-rw" 
+             style="width: 26px; height: 26px; margin-right: 12px;">
+        <strong>You can request that data be deleted</strong>
+    </p>
+
+    <!-- SEE DETAILS -->
+    <a href="#" style="
+        color: #007e5e;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+    ">See details</a>
+</div>
+
+    <!-- ratings + reviews -->
+    <div class="card" style="margin-top:12px">
+      <h3>Ratings & reviews</h3>
+
+      <div style="display:flex;gap:12px;align-items:center;margin-top:10px">
+        <div class="avg">4.9</div>
+        <div class="avg-meta">
+          <div class="muted">12,345 total</div>
+          <div class="muted">Most reviews are positive</div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px" class="rating-box">
+        <div class="rb">
+          <div class="rb-row"><div style="width:40px;color:var(--muted)">5★</div><div class="bar" style="width:100%"></div><div class="count">70%</div></div>
+          <div class="rb-row"><div style="width:40px;color:var(--muted)">4★</div><div class="bar" style="width:70%"></div><div class="count">18%</div></div>
+          <div class="rb-row"><div style="width:40px;color:var(--muted)">3★</div><div class="bar" style="width:40%"></div><div class="count">7%</div></div>
+        </div>
+      </div>
+
+      <!-- <div style="margin-top:12px">
+        <div class="review" aria-label="review by Asha">
+          <div style="display:flex;align-items:flex-start">
+            <div class="avatar">A</div>
+            <div style="flex:1">
+              <div style="font-weight:700">Asha <span style="color:var(--muted);font-weight:500">• 5★</span></div>
+              <div class="muted" style="margin-top:6px">Very smooth and reliable — love the charts.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="review" aria-label="review by Rahul">
+          <div style="display:flex;align-items:flex-start">
+            <div class="avatar">R</div>
+            <div style="flex:1">
+              <div style="font-weight:700">Rahul <span style="color:var(--muted);font-weight:500">• 4★</span></div>
+              <div class="muted" style="margin-top:6px">Useful history view. Waiting for dark mode.</div>
+            </div>
+          </div>
+        </div> -->
+            <div class="all-reviews">
+
+    <!-- Review 1 -->
+    <div class="single-review">
+        <div class="profile">
+            <div class="avatar">V</div>
+            <div>
+                <h4>Venkatesh Reddy</h4>
+                <p class="date">October 6, 2022</p>
+            </div>
+        </div>
+        <p class="review-text">
+            One of the finest applications in the Play Store to get online matka results.
+            Very accurate and fast updates. Loved the UI!
+        </p>
+
+        <div class="helpful-area">
+            <span>Was this review helpful?</span>
+            <button class="yes-btn">Yes</button>
+            <button class="no-btn">No</button>
+        </div>
+    </div>
+
+    <!-- Review 2 -->
+    <div class="single-review">
+        <div class="profile">
+            <div class="avatar">A</div>
+            <div>
+                <h4>Amit Sharma</h4>
+                <p class="date">November 12, 2022</p>
+            </div>
+        </div>
+        <p class="review-text">
+            Great app for checking results instantly. Very smooth and fast performance.
+            Highly recommended!
+        </p>
+
+        <div class="helpful-area">
+            <span>Was this review helpful?</span>
+            <button class="yes-btn">Yes</button>
+            <button class="no-btn">No</button>
+        </div>
+    </div>
+
+    <!-- Review 3 -->
+    <div class="single-review">
+        <div class="profile">
+            <div class="avatar">R</div>
+            <div>
+                <h4>Rahul Verma</h4>
+                <p class="date">January 4, 2023</p>
+            </div>
+        </div>
+        <p class="review-text">
+            The app gives very fast and trusted results. Really helpful and clean interface.
+        </p>
+
+        <div class="helpful-area">
+            <span>Was this review helpful?</span>
+            <button class="yes-btn">Yes</button>
+            <button class="no-btn">No</button>
+        </div>
+    </div>
+
+    <!-- Review 4 -->
+    <div class="single-review">
+        <div class="profile">
+            <div class="avatar">S</div>
+            <div>
+                <h4>Sunil Kumar</h4>
+                <p class="date">February 14, 2023</p>
+            </div>
+        </div>
+        <p class="review-text">
+            Best matka app in the market. Notifications are instant and no lag at all.
+        </p>
+
+        <div class="helpful-area">
+            <span>Was this review helpful?</span>
+            <button class="yes-btn">Yes</button>
+            <button class="no-btn">No</button>
+        </div>
+    </div>
+
+    <!-- Review 5 -->
+    <div class="single-review">
+        <div class="profile">
+            <div class="avatar">P</div>
+            <div>
+                <h4>Pooja Singh</h4>
+                <p class="date">March 2, 2023</p>
+            </div>
+        </div>
+        <p class="review-text">
+            Very reliable app and the layout is super easy to use. Loved the experience!
+        </p>
+
+        <div class="helpful-area">
+            <span>Was this review helpful?</span>
+            <button class="yes-btn">Yes</button>
+            <button class="no-btn">No</button>
+        </div>
+    </div>
+</div>
+</div>
+    </div>
+     <section class="review-section">
+    <h2 class="review-title">Reviews & Comment Area</h2>
+
+    <div class="review-box">
+        <form id="reviewForm">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            
+            <textarea id="message" placeholder="Describe your experience" required></textarea>
+
+            <label class="rate-label">Rate this app</label>
+
+            <div class="star-rating">
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>
+                <span class="star" data-value="5">&#9733;</span>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+</section>
+
+   <!-- developer / info -->
+<div class="card" style="margin-top:12px">
+  <h3 style="font-size:17px;font-weight:700;margin-bottom:10px;">Developer contact</h3>
+
+  <div class="muted" style="font-size:14px;">Royal Matka App — India</div>
+
+  <div style="margin-top:10px;font-size:14px;color:var(--muted)">
+    Version: 2.3.1<br>
+    Size: 15 MB<br>
+    Updated: Nov 20, 2024<br>
+    Requires Android: 5.0 and up
+  </div>
+
+  <div style="margin-top:16px;font-size:15px;">
+    <strong>Customer Support:</strong><br>
+    <a href="mailto:support@royalmatkaapp.com" style="color:var(--accent);text-decoration:none;">
+      support@royalmatkaapp.com
+    </a>
+  </div>
+
+  <div style="margin-top:12px;font-size:15px;">
+    <strong>Official Email:</strong><br>
+    <a href="mailto:contact@royalmatkaapp.com" style="color:var(--accent);text-decoration:none;">
+      contact@royalmatkaapp.com
+    </a>
+  </div>
+
+  <div style="margin-top:12px;font-size:15px;">
+    <strong>Phone:</strong><br>
+    <a href="tel:+919876543210" style="color:var(--accent);text-decoration:none;">
+      +91 9999999999
+    </a>
+  </div>
+
+  <div style="margin-top:12px;font-size:15px;">
+    <strong>Address:</strong><br>
+    Banglore, India
+  </div>
+
+  <div style="margin-top:15px;">
+    <a class="outline-btn" href="/privacy.html" >
+      Privacy policy
+    </a>
+  </div>
+</div>
+
+<div class="footer">© 2025 Royal Matka App · All rights reserved</div>
+
+
+  <!-- bottom fixed install (mobile) -->
+  <div class="bottom-stick" role="region" aria-label="install bar">
+    <div style="display:flex;align-items:center;gap:10px;flex:1;padding-left:12px">
+      <div style="width:48px;height:48px;border-radius:10px;overflow:hidden">
+        <img src="/images/WhatsApp Image 2025-11-23 at 12.24.13_79715eef.jpg" alt="icon" style="width:100%;height:100%;object-fit:cover">
+      </div>
+      <div style="flex:1">
+        <div style="font-weight:700">Royal Matka</div>
+        <div class="small-muted">Free · Entertainment</div>
+      </div>
+    </div>
+    <div style="padding-right:12px">
+      <a class="install-btn" href="https://royalmatkapp.com/download" target="_blank" rel="noopener">Install</a>
+    </div>
+  </div>
+
+<script>
+/* Small client JS: lazy load screenshots, fullscreen viewer, share */
+(function(){
+  // lazy load sframes
+  var sframes = document.querySelectorAll('.sframe');
+  sframes.forEach(function(el){
+    var src = el.getAttribute('data-src');
+    if(!src) return;
+    var img = new Image();
+    img.onload = function(){ el.style.backgroundImage = 'url(\"'+src+'\")'; };
+    img.src = src;
+    el.addEventListener('click', function(){
+      var modal = document.createElement('div'); modal.style.position='fixed'; modal.style.left=0; modal.style.top=0; modal.style.right=0; modal.style.bottom=0; modal.style.background='rgba(0,0,0,0.88)'; modal.style.display='flex'; modal.style.alignItems='center'; modal.style.justifyContent='center'; modal.style.zIndex=9999;
+      var im = document.createElement('img'); im.src = src; im.style.maxWidth='96%'; im.style.maxHeight='96%'; im.style.borderRadius='12px'; modal.appendChild(im);
+      modal.addEventListener('click', function(){ document.body.removeChild(modal); });
+      document.body.appendChild(modal);
+    });
+  });
+
+  let selectedRating = 0;
+
+document.querySelectorAll(".star").forEach(star => {
+    star.addEventListener("click", function () {
+        selectedRating = this.getAttribute("data-value");
+
+        document.querySelectorAll(".star").forEach(s => s.classList.remove("selected"));
+
+        for (let i = 0; i < selectedRating; i++) {
+            document.querySelectorAll(".star")[i].classList.add("selected");
+        }
+    });
+});
+
+document.getElementById("reviewForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    alert("Review submitted successfully!");
+});
+
+
+  // share
+  var shareBtn = document.getElementById('shareTop');
+  if(shareBtn) shareBtn.addEventListener('click', function(){
+    var url = location.href;
+    if(navigator.share) navigator.share({title:'Royal Matka',text:'Install Royal Matka',url:url}).catch(()=>{});
+    else { try{ navigator.clipboard.writeText(url); alert('Link copied to clipboard'); }catch(e){ prompt('Copy link', url); } }
+  });
+
+  // small animated installs count (demo)
+  var inst = document.getElementById('installs');
+  if(inst){
+    var start = 380000, end = 500000, step = Math.ceil((end-start)/60);
+    var id = setInterval(function(){ start+=step; if(start>=end){ inst.textContent='500,000+ installs'; clearInterval(id);} else inst.textContent = Math.round(start).toLocaleString() + ' installs'; },22);
+  }
+})();
+</script>
+</body>
+</html>
